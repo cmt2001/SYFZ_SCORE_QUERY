@@ -1,0 +1,1 @@
+print('this plugin shoudnt be import')
