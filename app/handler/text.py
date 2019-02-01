@@ -34,6 +34,7 @@ def text_msg_handler(message):
         #    response = state_commands[state]()
         response = command_not_found()
 
+    return response
 
 
 #下面是固定指令 不绑定任何关键词/状态.需要主动调用
