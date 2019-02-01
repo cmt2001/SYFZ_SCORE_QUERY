@@ -13,3 +13,5 @@ def handle_wechat_requst():
     msg = request.wechat_msg
     return wechat_response(msg)
 
+
+

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #这里是服务系统相关的配置文件
-DEBUG = False
+DEBUG = True
 
 # 应用的网址
 HOST_URL = "http://domain.com"
