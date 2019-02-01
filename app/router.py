@@ -8,8 +8,8 @@ from .flask_wechatpy import Wechat, wechat_required, oauth
 
 #微信公众号调用接口
 @flask_app.route('/wechat', methods=['GET','POST'])
+@wechat_required
 def handle_wechat_requst():
-    if request.method == 'GET':
-        return wechat_response(request.args)
-    return 'hello'
+    msg = request.wechat_msg
+    return wechat_response(msg)
 
