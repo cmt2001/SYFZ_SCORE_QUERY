@@ -8,4 +8,4 @@ HELP_TEXT = "回复 “ ? ” 查看主菜单\n"
 
 ERROR_IMPORT_PLUGIN = "导入%s插件失败！"
 
-ERROR_IMPORT_HANDLER = "导入%s器理器失败！"
+ERROR_IMPORT_HANDLER = "导入%s处理器失败！"
