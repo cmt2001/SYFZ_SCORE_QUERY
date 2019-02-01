@@ -6,17 +6,21 @@ DEBUG = False
 
 # 应用的网址
 HOST_URL = "http://domain.com"
-# Web 页面的百度统计
-BAIDU_ANALYTICS = ""
 
 # 微信公众平台配置
-APP_ID = ""
-APP_SECRET = ""
-TOKEN = ""
-EncodingAESKey = ""
+# wechatpy client 类型，0 为公众号（订阅号和服务号），1 为企业号
+WECHAT_TYPE = 0
+# 微信 APPID，如果是企业号则是 CORPID
+WECHAT_APPID = ""
+# 微信 SECRET 
+WECHAT_SECRET = ""
+# 微信接收消息时的 token
+WECHAT_TOKEN = ""
+# 微信消息加密的 key，如果是企业号则必填
+WECHAT_AES_KEY = ""
 
-# 数据库
-SQLALCHEMY_DATABASE_URI = "mysql://user:password@host/dbname?charset=utf8mb4"
+
+EncodingAESKey = ""
 
 # SimSimi key
 SIMSIMI_KEY = ''
