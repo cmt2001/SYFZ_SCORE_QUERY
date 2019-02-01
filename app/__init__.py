@@ -1,3 +1,5 @@
+#微信消息处理框架导入
+from flask_wechatpy import Wechat, wechat_required, oauth
 
 #从plugin目录调用所有注册了的插件
 from flask import Flask

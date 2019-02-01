@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from celery.schedules import crontab
-
+#这里是服务系统相关的配置文件
 DEBUG = False
 
 # 应用的网址
@@ -18,25 +17,6 @@ EncodingAESKey = ""
 
 # 数据库
 SQLALCHEMY_DATABASE_URI = "mysql://user:password@host/dbname?charset=utf8mb4"
-
-# celery 配置
-CELERY_BROKER_URL = 'redis://ip:port',
-CELERY_RESULT_BACKEND = 'redis://ip:port'
-CELERY_TIMEZONE = 'Asia/Shanghai'
-CELERYBEAT_SCHEDULE = {
-    'every-15-min-at-8-to-22': {
-        'task': 'express.update',
-        'schedule': crontab(minute='*/15', hour='8-22')
-    },
-    'every-1-hour': {
-        'task': 'access_token.update',
-        'schedule': crontab(minute=0, hour='*/1')
-    },
-    'every-9-am': {
-        'task': 'library.return_books',
-        'schedule': crontab(minute=0, hour='9')
-    }
-}
 
 # SimSimi key
 SIMSIMI_KEY = ''
