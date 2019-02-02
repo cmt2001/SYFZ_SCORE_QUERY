@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from main import flask_app
+from main import app
 
 if __name__ == "__main__":
-    flask_app.debug = flask_app.config['DEBUG']
-    flask_app.run(host='0.0.0.0',port=80)
+    app.debug = app.config['DEBUG']
+    app.run(host='0.0.0.0',port=80)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .handler_list import all_handler
-from .. import flask_app
+from .. import app
 import importlib
 msg_type_resp = {}
 
@@ -17,4 +17,4 @@ for handler in all_handler:
     try:
         importlib.import_module('.'+handler, package=__package__)
     except ImportError:
-        flask_app.logger.warning(flask_app.config['ERROR_IMPORT_HANDLER'] % handler)
+        app.logger.warning(app.config['ERROR_IMPORT_HANDLER'] % handler)

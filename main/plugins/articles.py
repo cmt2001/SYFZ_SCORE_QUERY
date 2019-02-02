@@ -43,8 +43,8 @@ def make_articles(msg, articles):
     elif isinstance(articles, dict):
         reply.add_article(articles)
     else:
-        from .. import flask_app
-        flask_app.logger.warning(
+        from .. import app
+        app.logger.warning(
             'make_articles cant handle this message!\n%s' % articles)
 
     return reply

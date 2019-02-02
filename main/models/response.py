@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from ..vendor import msg_type_resp
-from .. import flask_app
+from .. import app
 from wechatpy.replies import create_reply
 def wechat_response(message):
     '''
@@ -12,7 +12,7 @@ def wechat_response(message):
         get_resp_handler = msg_type_resp[message.type]
         response = get_resp_handler(message)
     except KeyError:
-        content = flask_app.config['CANT_HANDLE_THIS_MESSAGE_TYPE']
+        content = app.config['CANT_HANDLE_THIS_MESSAGE_TYPE']
         response = create_reply(content,message)
 
     return response

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import flask_app
+from . import app
 from flask import request
 from .models.response import wechat_response
 from flask import render_template
@@ -9,17 +9,17 @@ from .flask_wechatpy import Wechat, wechat_required, oauth
 #访问不同网址由本文件处理
 
 #微信公众号调用接口
-@flask_app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET','POST'])
 @wechat_required
 def handle_wechat_requst():
     msg = request.wechat_msg
     return wechat_response(msg)
 
-@flask_app.route('/wechat')
+@app.route('/wechat')
 def index():
     return 'hello'
 
-@flask_app.route('/test')
+@app.route('/test')
 def test():
     exam_info = {
         'name' :'student name',

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .plugins_list import all_plugin
-from ..import flask_app
+from ..import app
 import importlib
 msg_keyword_resp = {}
 
@@ -17,4 +17,4 @@ for plugin in all_plugin:
     try:
         importlib.import_module('.'+plugin, package=__package__)
     except ImportError:
-        flask_app.logger.warning(flask_app.config['ERROR_IMPORT_PLUGIN'] % plugin)
+        app.logger.warning(app.config['ERROR_IMPORT_PLUGIN'] % plugin)
