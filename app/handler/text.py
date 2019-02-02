@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .import register_msg_type
 from ..plugins import msg_keyword_resp
 import re
@@ -20,7 +21,8 @@ def text_msg_handler(message):
         if re.match(keyword, message.content):
             # 指令匹配后，设置默认状态
             # set_user_state(openid, 'default')
-            response = msg_keyword_resp[keyword]()
+            app.logger.debug('COMMAND MATCH!')
+            response = msg_keyword_resp[keyword](message)
             keyword_match = True
             break
     
