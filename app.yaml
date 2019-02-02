@@ -1,7 +1,5 @@
 runtime: python37
 
-entrypoint: gunicorn run:flask_app -b :80
-
 handlers:
 - url: /.*
   script: auto
