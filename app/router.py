@@ -2,6 +2,7 @@
 from . import flask_app
 from flask import request
 from .models.response import wechat_response
+from flask import render_template
 #从plugin目录调用所有注册了的插件
 from .flask_wechatpy import Wechat, wechat_required, oauth
 #路由文件
@@ -17,3 +18,61 @@ def handle_wechat_requst():
 @flask_app.route('/wechat')
 def index():
     return 'hello'
+
+@flask_app.route('/test')
+def test():
+    exam_info = {
+        'name' :'student name',
+        'all_exam' :[
+            {'name': '第一次考试',
+                'data': [
+                    {
+                        'name': 'shuxue',
+                        'score': '96',
+                    },
+                    {
+                        'name': 'yuwen',
+                        'score': '33',
+                    },
+                    {
+                        'name': 'yingyu',
+                        'score': '96',
+                    },
+                    ]
+            },
+            {'name': '第二次考试',
+                'data': [
+                    {
+                        'name': 'shuxue',
+                        'score': '96',
+                    },
+                    {
+                        'name': 'yuwen',
+                        'score': '33',
+                    },
+                    {
+                        'name': 'yingyu',
+                        'score': '96',
+                    },
+                    ]
+            },
+            {'name': '第三次考试',
+                'data': [
+                    {
+                        'name': 'shuxue',
+                        'score': '96',
+                    },
+                    {
+                        'name': 'yuwen',
+                        'score': '33',
+                    },
+                    {
+                        'name': 'yingyu',
+                        'score': '96',
+                    },
+                    ]
+            }
+        ]
+    }
+    real_name = exam_info['name']
+    return render_template('score.html',exam_info=exam_info,real_name=real_name)

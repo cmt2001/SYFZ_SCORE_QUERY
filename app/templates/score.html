@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta content="telephone=no" name="format-detection" />
+    <title>广科小喵</title>
+    <link rel="stylesheet" href="http://gxgk-wechat.b0.upaiyun.com/styles/weui.min.css" />
+    <link rel="stylesheet" href="http://gxgk-wechat.b0.upaiyun.com/styles/score.min.css" />
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?{{ baidu_analytics }}";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <script>
+    $(function() {
+    $( "#accordion" ).accordion({
+        collapsible: true
+    });
+    });
+    </script>
+</head>
+
+<body ontouchstart>
+    <div class="container js_container">
+        <div class="page">
+            <div class="hd">
+                <h1 class="page_title">{{ real_name }} 期末成绩单</h1>
+                <p class="page_desc">点击右上角按钮分享</p>
+            </div>
+            <div id="accordion">
+                {% for exam in exam_info['all_exam'] %}
+                <h3>"{{exam['name']}}"</h3>
+                <div>
+                    {% for each_subject in exam['data'] %}
+                    <p>"{{each_subject['name']}}       {{each_subject['score']}}"</p>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            <p class="weui_cells_tips">数据更新于：{{ update_time }}</p>
+            <div class="qrcode">
+                <img src="">
+            </div>
+        </div>
+    </div>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        var jsapi = {{ jsapi }};
+        jsapi['debug'] = false;
+        wx.config(jsapi);
+        shareData = {
+            title: '{{ real_name }}的期末成绩单', // 分享标题
+            desc: '快来广科小喵微信查成绩', // 分享描述
+            link: location.href.split('#')[0], // 分享链接
+            imgUrl: 'http://gxgk-wechat.b0.upaiyun.com/icon.jpg' //分享图标
+        }
+        wx.ready(function(){
+            wx.onMenuShareTimeline(shareData);
+            wx.onMenuShareAppMessage(shareData);
+            wx.onMenuShareQQ(shareData);
+            wx.onMenuShareWeibo(shareData);
+            wx.onMenuShareQZone(shareData);
+        });
+    </script>
+</body>
+
+</html>
