@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .handler_list import all_handler
 from .. import flask_app
 import importlib

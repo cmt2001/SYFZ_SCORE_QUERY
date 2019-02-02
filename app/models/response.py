@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from ..vendor import msg_type_resp
 from .. import flask_app
 def wechat_response(message):

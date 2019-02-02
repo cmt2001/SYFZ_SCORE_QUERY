@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask
 flask_app = Flask(__name__, instance_relative_config=True)
 # 根目录下面的config

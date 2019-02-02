@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .plugins_list import all_plugin
 from ..import flask_app
 import importlib

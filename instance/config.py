@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#这里是服务系统相关的配置文件
+# 这里是服务系统相关的配置文件
 DEBUG = True
 
 # 应用的网址
@@ -11,11 +11,11 @@ HOST_URL = "http://domain.com"
 # wechatpy client 类型，0 为公众号（订阅号和服务号），1 为企业号
 WECHAT_TYPE = 0
 # 微信 APPID，如果是企业号则是 CORPID
-WECHAT_APPID = ""
+WECHAT_APPID = "TEST"
 # 微信 SECRET 
-WECHAT_SECRET = ""
+WECHAT_SECRET = "TEST"
 # 微信接收消息时的 token
-WECHAT_TOKEN = ""
+WECHAT_TOKEN = "TEST"
 # 微信消息加密的 key，如果是企业号则必填
 WECHAT_AES_KEY = ""
 
