@@ -7,21 +7,17 @@ from urllib.request import build_opener
 import pyamf
 from pyamf import remoting
 from pyamf.flex import messaging
-#from ...import app
+from ...import app
 
-url = "http://58.118.14.27:8080/SchoolCenter/messagebroker/amf"
+url = app.config['JW_WAN_HOST']
 
 
 # 发送请求
 def invoke(data):
     proxie = None
     # 调试模式代理
-    '''
     if app.config['DEBUG'] and app.config['debug_proxie']:
         proxie = app.config['debug_proxie']
-    else:
-        proxie = None
-    '''
     # 构造请求
     req = urllib.request.Request(
         url, data, headers={"Content-Type": "application/x-amf"})
@@ -57,10 +53,10 @@ def getAllStudentMultiExam(student_id):
     return invoke(data)
 
 
-def get_seStudentScore(student_id):
+def get_meStudentScore(student_id):
     # 返回数据
     res = {
-        #学生姓名
+        # 学生姓名
         'student_name': '',
         # 是否查到数据
         'success': False,
@@ -96,7 +92,7 @@ def get_seStudentScore(student_id):
             # 初始化考试名称
             MultiExam_name = multiExam["multiExam"]["meName"]
             res['all_MultiExam'][MultiExam_name] = {}
-            #从 v0.2抄过来的
+            # 从 v0.2抄过来的
             # 总分
             messScore = multiExam["meStudentScore"]["messScore"]
             res['all_MultiExam'][MultiExam_name]['total'] = {
@@ -108,7 +104,7 @@ def get_seStudentScore(student_id):
 
             for seStudentScore in multiExam["seStudentScoreList"]:
                 # 试卷id
-                seId = seStudentScore["seId"]
+                seId = str(seStudentScore["seId"])
                 seIds.append(seId)
                 seScore = seStudentScore["essScore"]
                 essGradeOrder = seStudentScore["essGradeOrder"]
@@ -122,8 +118,8 @@ def get_seStudentScore(student_id):
                 }
 
             for singleExam in multiExam["singleExams"]:
-                if singleExam["seId"] in seIds:
-                    seId = singleExam["seId"]
+                seId = str(singleExam["seId"])
+                if seId in seIds:
                     seCourseName = singleExam["seCourseName"]
                     res['all_MultiExam'][MultiExam_name][seId][
                         "seCourseName"] = seCourseName
@@ -132,4 +128,4 @@ def get_seStudentScore(student_id):
 
 
 if __name__ == "__main__":
-    print(get_seStudentScore('08110815'))
+    print(get_meStudentScore('00000000'))
