@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import app
 from flask import request
-from .models.response import wechat_response
+from .handler import wechat_response
 from flask import render_template
 #从plugin目录调用所有注册了的插件
 from .flask_wechatpy import Wechat, wechat_required, oauth
