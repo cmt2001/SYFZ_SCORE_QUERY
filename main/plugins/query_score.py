@@ -5,6 +5,8 @@ from sys import version_info
 from .dep.score import get_meStudentScore
 from ast import literal_eval
 from wechatpy.replies import create_reply
+from ..models.firestore import db
+import time
 
 if version_info.major != 3:
     raise RuntimeWarning(app.config['ERROR_RUNTIME_VERSION'] % u"python34")
@@ -19,11 +21,20 @@ def query_score(msg):
     params = msg.content.split(" ")
 
     if len(params) == 2 and isinstance(literal_eval(params[1]),int):
+        # 查询
         res = get_meStudentScore(params[1])
+        # 保存到firestore
+        doc_ref = db.collection('score_data').document(params[1])
+        t = time.time()
+        t = str(int(t))
+        doc_ref.set({
+            t: res,
+        })
+        # 查询成功
         if res['success']:
             return reply_articles([{
                 'title': res['student_name']+'的成绩单',
-                'url': app.config['HOST_URL'],
+                'url': app.config['HOST_URL'] + '/score/' + t,
             }],msg)
         else:
             create_reply('获取失败，稍后再试')
