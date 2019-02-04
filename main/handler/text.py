@@ -15,8 +15,8 @@ def text_msg_handler(message):
 
     # 替换全角空格为半角空格
     message.content = message.content.replace(u'　', ' ')
-    # 清除行首空格
-    message.content = message.content.lstrip()
+    # 清除首尾空格
+    message.content = message.content.strip()
 
     # 匹配指令(关键词)
     keyword_match = False
