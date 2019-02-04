@@ -11,3 +11,5 @@ HELP_TEXT = u"回复 “ ? ” 查看主菜单\n"
 ERROR_IMPORT_PLUGIN = u"导入%s插件失败！"
 
 ERROR_IMPORT_HANDLER = u"导入%s处理器失败！"
+
+ERROR_RUNTIME_VERSION = u"不兼容当前python版本！要求最低版本为%s"
