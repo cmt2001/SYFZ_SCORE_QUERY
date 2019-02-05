@@ -23,25 +23,30 @@ def query_score(msg):
         "”", "").replace("，", ","))  # 首先处理一些无用数据 如空格 引号
     params = msg.content.split(" ")
 
-    if len(params) == 2 and isinstance(literal_eval(params[1]), int):
-        # 查询
-        res = get_meStudentScore(params[1])
-        # 保存到firestore
-        t = time.time()
-        t = str(int(t))
-        doc_ref = db.collection('score_data').document(
-            params[1]).collection(t).document('data')
-        res = zlib.compress(str.encode(str(res)))
-        doc_ref.set({
-            t: res,
-        })
-        # 查询成功
-        if res['success']:
-            return reply_articles([{
-                'title':
-                res['student_name'] + '的成绩单',
-                'url':
-                app.config['HOST_URL'] + f'/score-report/{params[1]}/{t}'
-            }], msg)
-        else:
-            create_reply('获取失败，稍后再试')
+    try:
+        int(params[1])
+    except:
+        return create_reply('输入内容不合法')
+    else:
+        if len(params) == 2:
+            # 查询
+            res = get_meStudentScore(params[1])
+            # 保存到firestore
+            t = time.time()
+            t = str(int(t))
+            doc_ref = db.collection('score_data').document(
+                params[1]).collection(t).document('data')
+            res = zlib.compress(str.encode(str(res)))
+            doc_ref.set({
+                t: res,
+            })
+            # 查询成功
+            if res['success']:
+                return reply_articles([{
+                    'title':
+                    res['student_name'] + '的成绩单',
+                    'url':
+                    app.config['HOST_URL'] + f'/score-report/{params[1]}/{t}'
+                }], msg)
+            else:
+                return create_reply('获取失败，稍后再试')
