@@ -8,7 +8,7 @@ from wechatpy.replies import create_reply
 from ..models.firestore import db
 import time
 import zlib
-from ...test import res
+
 if version_info.major != 3:
     raise RuntimeWarning(app.config['ERROR_RUNTIME_VERSION'] % u"python34")
 
