@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <meta content="telephone=no" name="format-detection" />
-    <title>广科小喵</title>
+    <title>{{exam_info['student_name']}}的成绩单</title>
     <link rel="stylesheet" href="http://gxgk-wechat.b0.upaiyun.com/styles/weui.min.css" />
     <link rel="stylesheet" href="http://gxgk-wechat.b0.upaiyun.com/styles/score.min.css" />
     <script type="text/javascript">
@@ -38,12 +38,36 @@
                 <p class="page_desc">点击右上角按钮分享</p>
             </div>
             <div id="accordion">
-                {% for exam in exam_info['all_exam'] %}
-                <h3>"{{exam['name']}}"</h3>
+                {% for meExam_name in exam_info['all_MultiExam'] %}
+                <h3>{{meExam_name}}</h3>
                 <div>
-                    {% for each_subject in exam['data'] %}
-                    <p>"{{each_subject['name']}}       {{each_subject['score']}}"</p>
-                    {% endfor %}
+                    <div class="weui_cells">
+                        {% for object_id in exam_info['all_MultiExam'][meExam_name] %}
+                        {if exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName'] == total: pass}
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>{{exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName']}}</p>
+                            </div>
+                            <div class="weui_cell_ft">
+                                <p>{{exam_info['all_MultiExam'][meExam_name][object_id]['seScore']}}分
+                                    班级{{exam_info['all_MultiExam'][meExam_name][object_id]['essClassOrder']}}名
+                                    年级{{exam_info['all_MultiExam'][meExam_name][object_id]['essGradeOrder']}}名
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>总分</p>
+                            </div>
+                            <div class="weui_cell_ft">
+                                <p>{{exam_info['all_MultiExam'][meExam_name]['total']['seScore']}}分
+                                    班级{{exam_info['all_MultiExam'][meExam_name]['total']['essClassOrder']}}名
+                                    年级{{exam_info['all_MultiExam'][meExam_name]['total']['essGradeOrder']}}名
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -60,7 +84,7 @@
         wx.config(jsapi);
         shareData = {
             title: '{{ real_name }}的期末成绩单', // 分享标题
-            desc: '快来广科小喵微信查成绩', // 分享描述
+            desc: '', // 分享描述
             link: location.href.split('#')[0], // 分享链接
             imgUrl: 'http://gxgk-wechat.b0.upaiyun.com/icon.jpg' //分享图标
         }
