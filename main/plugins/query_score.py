@@ -26,7 +26,7 @@ def query_score(msg):
     try:
         int(params[1])
     except:
-        return create_reply('输入内容不合法')
+        return create_reply('输入内容不合法',msg)
     else:
         if len(params) == 2:
             # 查询
@@ -49,4 +49,4 @@ def query_score(msg):
                     app.config['HOST_URL'] + f'/score-report/{params[1]}/{t}'
                 }], msg)
             else:
-                return create_reply('获取失败，稍后再试')
+                return create_reply('获取失败，稍后再试',msg)
