@@ -42,7 +42,7 @@
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
                         {% for object_id in exam_info['all_MultiExam'][meExam_name] %}
-                        {% if exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName'] == 'total': continue %}
+                        {% if exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName'] != 'total'%}
                         <div class="panel-body">
                             <td align="left">{{exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName']}}</td>
                             <td align="right">{{exam_info['all_MultiExam'][meExam_name][object_id]['seScore']}}分</td>
@@ -51,6 +51,7 @@
                             <br />
                             <td align="right">年级{{exam_info['all_MultiExam'][meExam_name][object_id]['essGradeOrder']}}名</td>
                         </div>
+                        {% endif %}
                         {% endfor %}
                         <div class="panel-body">
                             <td align="left">{{exam_info['all_MultiExam'][meExam_name]['total']['seCourseName']}}</td>
