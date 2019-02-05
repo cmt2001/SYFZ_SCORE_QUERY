@@ -30,8 +30,9 @@ def wechat_response(message):
     try:
         get_resp_handler = msg_type_resp[message.type]
         response = get_resp_handler(message)
-    except KeyError:
+    except Exception as e:
         content = app.config['CANT_HANDLE_THIS_MESSAGE_TYPE']
         response = create_reply(content,message)
+        app.logger.warning(e)
 
     return response

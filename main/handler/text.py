@@ -18,13 +18,14 @@ def text_msg_handler(message):
     # 清除首尾空格
     message.content = message.content.strip()
 
+    app.logger.debug('receive message:%s' % message.content)
     # 匹配指令(关键词)
     keyword_match = False
     for keyword in msg_keyword_resp:
         if re.match(keyword, message.content):
             # 指令匹配后，设置默认状态
             # set_user_state(openid, 'default')
-            app.logger.debug('COMMAND MATCH!')
+            app.logger.debug('COMMAND MATCH! %s' % keyword)
             response = msg_keyword_resp[keyword](message)
             keyword_match = True
             break
