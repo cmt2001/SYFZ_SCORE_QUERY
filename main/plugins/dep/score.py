@@ -9,9 +9,12 @@ from pyamf import remoting
 from pyamf.flex import messaging
 from ...import app
 
+app.config.setdefault('JW_WAN_HOST', None)
+app.config.setdefault('debug_proxie', None)
+
 url = app.config['JW_WAN_HOST']
 
-
+assert app.config['JW_WAN_HOST'] is not None
 # 发送请求
 def invoke(data):
     proxie = None
