@@ -8,7 +8,7 @@ from wechatpy.replies import create_reply
 from ..models.firestore import db
 import time
 import zlib
-
+from ...test import res
 if version_info.major != 3:
     raise RuntimeWarning(app.config['ERROR_RUNTIME_VERSION'] % u"python34")
 
@@ -36,9 +36,9 @@ def query_score(msg):
             t = str(int(t))
             doc_ref = db.collection('score_data').document(
                 params[1]).collection(t).document('data')
-            res = zlib.compress(str.encode(str(res)))
+            res_comp = zlib.compress(str.encode(str(res)))
             doc_ref.set({
-                t: res,
+                t: res_comp,
             })
             # 查询成功
             if res['success']:
