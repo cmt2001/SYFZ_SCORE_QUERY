@@ -35,39 +35,43 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" 
-                            href="#collapseOne">
+                            href="#{{meExam_name}}">
                             {{meExam_name}}
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
+                    <div id="{{meExam_name}}" class="panel-collapse collapse">
                         {% for object_id in exam_info['all_MultiExam'][meExam_name] %}
-                        {% if exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName'] != 'total' %}
+                        {% if object_id != 'total' %}
                         <div class="panel-body">
-                            <td align="left">{{exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName']}}</td>
-                            <td align="right">{{exam_info['all_MultiExam'][meExam_name][object_id]['seScore']}}分</td>
-                            <br />
-                            <td align="right">班级{{exam_info['all_MultiExam'][meExam_name][object_id]['essClassOrder']}}名</td>
-                            <br />
-                            <td align="right">年级{{exam_info['all_MultiExam'][meExam_name][object_id]['essGradeOrder']}}名</td>
+                            <div class="text clearfix" style="text-align:center;">
+                                <span style="float:left;">
+                                    {{exam_info['all_MultiExam'][meExam_name][object_id]['seCourseName']}}<br />
+                                    {{exam_info['all_MultiExam'][meExam_name][object_id]['seScore']}}分<br />
+                                    班级{{exam_info['all_MultiExam'][meExam_name][object_id]['essClassOrder']}}名<br />
+                                    年级{{exam_info['all_MultiExam'][meExam_name][object_id]['essGradeOrder']}}名
+                                </span>
+                            </div>
                         </div>
                         {% endif %}
                         {% endfor %}
                         <div class="panel-body">
-                            <td align="left">{{exam_info['all_MultiExam'][meExam_name]['total']['seCourseName']}}</td>
-                            <td align="right">{{exam_info['all_MultiExam'][meExam_name]['total']['seScore']}}分</td>
-                            <br />
-                            <td align="right">班级{{exam_info['all_MultiExam'][meExam_name]['total']['class_order']}}名</td>
-                            <br />
-                            <td align="right">年级{{exam_info['all_MultiExam'][meExam_name]['total']['grade_order']}}名</td>
+                            <div class="text clearfix" style="text-align:center;">
+                                <span style="float:left;">
+                                    {{exam_info['all_MultiExam'][meExam_name]['total']['seCourseName']}}<br />
+                                    {{exam_info['all_MultiExam'][meExam_name]['total']['seScore']}}分<br />
+                                    班级{{exam_info['all_MultiExam'][meExam_name]['total']['class_order']}}名<br />
+                                    年级{{exam_info['all_MultiExam'][meExam_name]['total']['grade_order']}}名
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
-            <p class="weui_cells_tips">数据更新于：{{ update_time }}</p>
-            <div class="qrcode">
-                <img src="">
+                <p class="weui_cells_tips">数据更新于：{{ update_time }}</p>
+                <div class="qrcode">
+                    <img src="">
+                </div>
             </div>
         </div>
     </div>

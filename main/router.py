@@ -20,68 +20,18 @@ def handle_wechat_requst():
 @app.route('/wechat')
 def index():
     return 'hello'
+    
 @app.route('/score-report/<stu_id>/<time_stamp>', methods=['GET'])
 def score(stu_id=None, time_stamp=None):
     #app.config['HOST_URL'] + f'/score-report/{params[1]}/{t}'
     doc = db.collection('score_data').document(stu_id).collection(time_stamp).document('data')
-    res = doc.get().to_dict()[time_stamp]
+    res = doc.get().to_dict()
+    if res == None:
+        return '未查询到数据'
+    res = res[time_stamp]
     res = ast.literal_eval(bytes.decode(zlib.decompress(res)))
-    return render_template('score.html',exam_info=res,update_time=time_stamp)
+    return render_template('score.html',exam_info=res,update_time=time_stamp),404
 
-@app.route('/test')
-def test():
-    exam_info = {
-        'name' :'student name',
-        'all_exam' :[
-            {'name': '第一次考试',
-                'data': [
-                    {
-                        'name': 'shuxue',
-                        'score': '96',
-                    },
-                    {
-                        'name': 'yuwen',
-                        'score': '33',
-                    },
-                    {
-                        'name': 'yingyu',
-                        'score': '96',
-                    },
-                    ]
-            },
-            {'name': '第二次考试',
-                'data': [
-                    {
-                        'name': 'shuxue',
-                        'score': '96',
-                    },
-                    {
-                        'name': 'yuwen',
-                        'score': '33',
-                    },
-                    {
-                        'name': 'yingyu',
-                        'score': '96',
-                    },
-                    ]
-            },
-            {'name': '第三次考试',
-                'data': [
-                    {
-                        'name': 'shuxue',
-                        'score': '96',
-                    },
-                    {
-                        'name': 'yuwen',
-                        'score': '33',
-                    },
-                    {
-                        'name': 'yingyu',
-                        'score': '96',
-                    },
-                    ]
-            }
-        ]
-    }
-    real_name = exam_info['name']
-    return render_template('score.html',exam_info=exam_info,real_name=real_name)
+@app.route('/verify/<file_name>')
+def verify(file_name=None):
+    return app.send_static_file(f'/verify/{file_name}')
